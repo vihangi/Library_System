@@ -28,6 +28,8 @@ class ReadingListApp(App):
     def handle_reset(self):
         self.root.ids.output_label.text=""
         self.root.ids.input_name.text=""
+        dsf
+        fsfd
 
 ReadingListApp().run()
 
