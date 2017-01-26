@@ -1,0 +1,100 @@
+# create your Kivy layout in the kv language here
+
+BoxLayout:
+    # this layout has an id so we can check if it is the parent of the popup - below
+    id: mainBox
+
+        BoxLayout:
+            # layout for input fields and action buttons
+            id: inputs
+            orientation: 'vertical'
+            BoxLayout:
+            # layout for input fields and action buttons
+                id: books_list
+                orientation: 'vertical'
+                    Button:
+                        text: 'List required'
+                        #on_release: app.press_save(addedName.text, addedNumber.text)
+                    Button:
+                        text: 'List completed'
+                        #on_release: app.press_cancel()
+
+            BoxLayout:
+                # layout for input fields and action buttons
+                id: add_book
+                orientation: 'vertical'
+                Button:
+                    text: 'Add new book'
+                    #on_release: app.press_save(addedName.text, addedNumber.text)
+                Label:
+                    text: 'Title '
+                    size_hint_y: None
+                    height: '48dp'
+
+                TextInput:
+                    id: addedTitle
+                    value: ''
+                    size_hint_y: None
+                    height: '48dp'
+                    # the next two lines make it so that pressing Tab moves the cursor
+                    # to the next input field instead of entering the Tab character
+                    multiline: False
+                    write_tab: False
+                Label:
+                    text: 'Author: '
+                    size_hint_y: None
+                    height: '48dp'
+                TextInput:
+                    id: addedAuthor
+                    value: ''
+                    size_hint_y: None
+                    height: '48dp'
+                    multiline: False
+                    write_tab: False
+
+                Label:
+                    text: 'Pages: '
+                    size_hint_y: None
+                    height: '48dp'
+                TextInput:
+                    id: addedPages
+                    value: ''
+                    size_hint_y: None
+                    height: '48dp'
+                    multiline: False
+                    write_tab: False
+
+                Button:
+                    text: 'Add Item'
+                    #on_release: app.press_save(addedName.text, addedNumber.text)
+
+                Button:
+                    id: clearButton
+                    text: 'Clear'
+                    on_release: app.press_clear()
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_x: 0.3
+                Button:
+                    id: addButton
+                    text: 'Add New Entry'
+                    on_release: app.press_add()
+                Button:
+                    id: clearButton
+                    text: 'Clear'
+                    on_release: app.press_clear()
+
+            GridLayout:
+                # this layout is populated with (button) widgets in app code
+                id: entriesBox
+                cols: 1
+                orientation: 'vertical'
+        Label:
+            id: statusLabel
+            size_hint_y: 0.1
+            text: app.status_text

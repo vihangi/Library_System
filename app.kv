@@ -1,0 +1,62 @@
+BoxLayout:
+    orientation: 'vertical'
+#    orientation: 'horizontal'
+    BoxLayout:
+        orientation:'horizontal'
+        BoxLayout:
+            orientation:'vertical'
+            size_hint_x: 0.3
+            Button:
+                text: 'List required'
+                on_press: app.handle_greet()
+            Button:
+                text: 'List completed'
+                on_press: app.handle_greet()
+
+            Button:
+                text: 'Add new book'
+                on_press: app.handle_greet()
+            Label:
+                text: 'Title'
+                color: (1, 1, 0, 1)
+                id: output_label
+            TextInput:
+                id: input_title
+                text: ''
+            Label:
+                text: 'Author'
+                color: (1, 1, 0, 1)
+                id: output_label
+            TextInput:
+                id: input_author
+                text: ''
+            Label:
+                text: 'Pages'
+                color: (1, 1, 0, 1)
+                id: output_label
+            TextInput:
+                id: input_pages
+                text: ''
+
+            Button:
+                text: 'Add item'
+                on_press: app.handle_reset()
+
+            Button:
+                text: 'reset'
+                on_press: app.handle_reset()
+
+        BoxLayout:
+            orientation:'vertical'
+            Label:
+                text: 'Total pages to read'
+                color: (1, 1, 0, 1)
+                id: output_label
+            GridLayout:
+                id:entries
+                cols: 1
+                orientation: 'vertical'
+            Label:
+                text: 'click books to mark them as completed'
+                color: (1, 1, 0, 1)
+                id: output_label
