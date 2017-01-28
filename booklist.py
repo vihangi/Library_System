@@ -8,20 +8,24 @@ from operator import itemgetter
 class BookList():
 
     def __init__(self):
-        FILENAME = "books.csv"
+
         self.file_list = []
         self.required_books=[]
         self.completed_books=[]
-        file_pointer = open(FILENAME, "r")
+        file_pointer = open("books.csv", "r")
         for index, data in enumerate(file_pointer.readlines()):
             data = data.strip()
             datum = data.split(",")
+
             #print(index, datum)
             self.file_list.append(datum)
-        self.file_list.sort(key=itemgetter(1, 2))
+
+        #self.file_list.sort(key=itemgetter(1, 2))
         #print(self.file_list)
 
-
+        for i in range(len(self.file_list)):
+            self.index_value = str(i)
+            self.file_list[i].append(self.index_value)
 
 
         file_pointer.close()
@@ -71,8 +75,10 @@ class BookList():
         self.data.append(self.author)
         self.data.append(self.pages)
         self.data.append("r")
+        self.index_value=int(self.index_value)+1
+        self.data.append(self.index_value)
 
-        self.book.append(self.data)
+
 
         self.required_books.append(self.data)
 
@@ -96,9 +102,34 @@ class BookList():
         print(self.total_pages)
 
     def save_Books(self):
-        pass
+        self.list_books = []
+        dataValue = ""
+        # stores all the books in one single list
+        for i in range(len(self.required_books)):
+            self.list_books.append(self.required_books[i])
+        for i in range(len(self.completed_books)):
+            self.list_books.append(self.completed_books[i])
+
+        # opens the file to rewrite
+        outFile = open("books.csv", "w")
+
+        for i in range(len(self.list_books)-1):
+            # slicing the data to remove the index number
+            data = self.list_books[i][:4]
+            # writing in the file
+            for j in range(4):
+                dataValue = data[j]
+                outFile.write(dataValue)
+                if j < 3:
+                    outFile.write(",")
+                else:
+                    outFile.write("\n")
+        outFile.close()
+        print("{} books saved to {} \nHave a nice day :)".format(len(self.list_books) - 1, "books.csv"))
+
     def sort_books(self):
-        pass
+        self.book.sort(key=itemgetter(1, 2))
+        print(self.book)
 
 
 
