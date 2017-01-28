@@ -74,6 +74,14 @@ class BookList():
         self.title = title
         self.author= author
         self.pages= pages
+        self.data=[]
+        self.data.append(self.title)
+        self.data.append(self.author)
+        self.data.append(self.pages)
+        self.data.append("r")
+
+        self.file_list.append(self.data)
+        return self.file_list
 
     def total_required_books(self):
         pass
