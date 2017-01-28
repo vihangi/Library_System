@@ -6,28 +6,12 @@ from operator import itemgetter
 
 
 class BookList():
-    def load_books(self):
-        pass
-
-
-
-
-    def load_books(self):
-        FILENAME = "books.csv"
-        self.file_list=[]
-        file_pointer = open(FILENAME, "r")
-        for index, data in enumerate(file_pointer.readlines()):
-            data = data.strip()
-            datum = data.split(",")
-            print(index, datum)
-            self.file_list.append(datum)
-        self.file_list.sort(key=itemgetter(1, 2))
-        print(self.file_list)
-        file_pointer.close()
 
     def __init__(self):
         FILENAME = "books.csv"
         self.file_list = []
+        self.required_books=[]
+        self.completed_books=[]
         file_pointer = open(FILENAME, "r")
         for index, data in enumerate(file_pointer.readlines()):
             data = data.strip()
@@ -36,20 +20,28 @@ class BookList():
             self.file_list.append(datum)
         self.file_list.sort(key=itemgetter(1, 2))
         #print(self.file_list)
+
+
+
+
         file_pointer.close()
 
         self.book=self.file_list
-        self.title=self.book[0]
-        self.author=self.book[1]
-        self.pages=self.book[2]
-        self.status=self.book[3]
-        self.index=self.book[4]
 
 
+        for i in range(len(self.book)):
+
+            if self.book[i][3] == "r":
+                self.required_books.append(self.book[i])
+
+            if self.book[i][3] == "c":
+                self.completed_books.append(self.book[i])
+        print("required{}".format(self.required_books))
+        print("completed{}".format(self.completed_books))
 
 
     def __str__(self):
-        return "{},{},{},{},{}".format(self.title, self.author,self.pages,self.status,self.index)
+        return "{}".format(self.book)
 
     def search_by_title(self,title):
         count=0
@@ -80,14 +72,29 @@ class BookList():
         self.data.append(self.pages)
         self.data.append("r")
 
-        self.file_list.append(self.data)
+        self.book.append(self.data)
+
+        self.required_books.append(self.data)
+
+
         return self.file_list
 
-    def total_required_books(self):
-        pass
+    def pages_required_books_(self):
+
+        self.total_pages=0
+        for i in range(len(self.required_books)):
+            self.total_pages=int(self.required_books[i][2])+self.total_pages
+
+        print(self.total_pages)
+
 
     def total_completed_books(self):
-        pass
+        self.total_pages = 0
+        for i in range(len(self.completed_books)):
+            self.total_pages = int(self.completed_books[i][2]) + self.total_pages
+
+        print(self.total_pages)
+
     def save_Books(self):
         pass
     def sort_books(self):

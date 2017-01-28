@@ -46,7 +46,9 @@ def read():
     # test mark_completed()
 
 h=BookList()
-#print(h)
+print(h)
 q=h.search_by_title("In Search of Lost Time")
 print(q)
 print(h.add_book("aa","ss","22"))
+h.pages_required_books_()
+h.total_completed_books()
