@@ -11,48 +11,31 @@ add_books = []
 completed_books = []
 marked_books = []
 class BookList():
-    def load_file(self):
-            """
-            This function loads the file and reads all the data. It stores the data onto a list. The list is then sorted and
-            appended with index numbers according to the authors name . It also seperates the data into required_books and
-            completed_books list based on whether its third index is "r" or "c" respectively.
-            :return: null
-            """
-            # defining these variables as global so that they can be called in any function
-            global required_books
-            global completed_books
-            global index_value
-            datum = []
-            self.all_books = []
-            self.required = "r"
-            self.completed = "c"
-            self.file_pointer = open(FILENAME, "r")
-            # reading the file
-            for index, data in enumerate(self.file_pointer.readlines()):
-                self.data = self.data.strip()
-                selfdatum = self.data.split(",")
-                self.all_books.append(datum)
-            self.all_books.sort(key=itemgetter(1, 2))
-            # distrubuting the data into required_books and completed_books
-            for i in range(len(self.all_books)):
-                index_value = str(i)
-                self.all_books[i].append(index_value)
-            for i in range(len(self.all_books)):
-                if self.all_books[i][3] == "r":
-                    required_books.append(self.all_books[i])
-                if self.all_books[i][3] == "c":
-                    completed_books.append(self.all_books[i])
+    def load_books(self):
+        pass
+    def __init__(self, books=[]):
+        self.book=books
+        self.title=self.book[0]
+        self.author=self.book[1]
+        self.pages=self.book[2]
+        self.status=self.book[3]
+        self.index=self.book[4]
 
-            self.file_pointer.close()
-            print(self.all_books)
+
+
+
+    def __str__(self):
+        return "{},{},{},{},{}".format(self.title, self.author,self.pages,self.status,self.index)
 
     def search_by_title(self,title):
-        self.title = title
-        for i in range(len(self.all_books)):
-            if self.title == self.all_books[i]:
+        self.search_title = title
+        for i in range(len(self.book)):
+            if(self.search_title == self.all_books[i][0]):
                 #display
-                self.book= self.all_books[i]
+                print(self.book[i])
                 break
+            else:
+                print("not found")
         return self.book
 
     def add_book(self,title,author,pages):
@@ -61,15 +44,15 @@ class BookList():
         self.pages= pages
 
     def total_required_books(self):
+        pass
 
     def total_completed_books(self):
-
+        pass
     def save_Books(self):
-
+        pass
     def sort_books(self):
+        pass
 
 
 
 
-
-load_file()
