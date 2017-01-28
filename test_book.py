@@ -2,7 +2,7 @@
 (incomplete) Tests for Book class
 """
 from booklist import BookList
-
+"""
 
 from operator import itemgetter
 #defining the variables
@@ -40,8 +40,12 @@ def read():
     for i in range(len(all_books)):
         print(BookList(all_books[i]))
     f="Devloping the Leader Within You"
+    """
     #print(BookList.search_by_title(f))
 
     # test mark_completed()
 
-read()
+h=BookList()
+#print(h)
+q=h.search_by_title("In Search of Lost Time")
+print(q)

@@ -8,14 +8,14 @@ BoxLayout:
             size_hint_x: 0.3
             Button:
                 text: 'List required'
-                on_press: app.handle_greet()
+                on_press: app.handle_required()
             Button:
                 text: 'List completed'
-                on_press: app.handle_greet()
+                on_press: app.handle_completed()
 
             Button:
                 text: 'Add new book'
-                on_press: app.handle_greet()
+                on_press: app.handle_add_new_book()
             Label:
                 text: 'Title'
                 color: (1, 1, 0, 1)
@@ -40,7 +40,7 @@ BoxLayout:
 
             Button:
                 text: 'Add item'
-                on_press: app.handle_reset()
+                on_press: app.handle_add_new_book()
 
             Button:
                 text: 'reset'

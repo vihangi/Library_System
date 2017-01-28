@@ -1,0 +1,40 @@
+BoxLayout:
+    orientation: 'vertical'
+
+    BoxLayout:
+        Button:
+            text: "X"
+            on_press: app.button_press(self)
+        Button:
+            text: "O"
+            on_press: app.button_press(self)
+        Button:
+            text: ""
+            on_press: app.button_press(self)
+    BoxLayout:
+        Button:
+            text: ""
+            on_press: app.button_press(self)
+        Button:
+            text: "X"
+            on_press: app.button_press(self)
+        Button:
+            text: "O"
+            on_press: app.button_press(self)
+    BoxLayout:
+        Button:
+            text: "O"
+            on_press: app.button_press(self)
+        Button:
+            text: "O"
+            on_press: app.button_press(self)
+        Button:
+            text: ""
+            on_press: app.button_press(self)
+    Label:
+        id: my_label
+        text: "who wins..."
+    TextInput:
+        id: my_input
+    Label:
+        text: app.msg

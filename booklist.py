@@ -2,19 +2,43 @@
 
 
 
-
 from operator import itemgetter
-# defining the variables
-FILENAME = "books.csv"
-required_books = []
-add_books = []
-completed_books = []
-marked_books = []
+
+
 class BookList():
     def load_books(self):
         pass
-    def __init__(self, books=[]):
-        self.book=books
+
+
+
+
+    def load_books(self):
+        FILENAME = "books.csv"
+        self.file_list=[]
+        file_pointer = open(FILENAME, "r")
+        for index, data in enumerate(file_pointer.readlines()):
+            data = data.strip()
+            datum = data.split(",")
+            print(index, datum)
+            self.file_list.append(datum)
+        self.file_list.sort(key=itemgetter(1, 2))
+        print(self.file_list)
+        file_pointer.close()
+
+    def __init__(self):
+        FILENAME = "books.csv"
+        self.file_list = []
+        file_pointer = open(FILENAME, "r")
+        for index, data in enumerate(file_pointer.readlines()):
+            data = data.strip()
+            datum = data.split(",")
+            #print(index, datum)
+            self.file_list.append(datum)
+        self.file_list.sort(key=itemgetter(1, 2))
+        #print(self.file_list)
+        file_pointer.close()
+
+        self.book=self.file_list
         self.title=self.book[0]
         self.author=self.book[1]
         self.pages=self.book[2]
@@ -28,15 +52,23 @@ class BookList():
         return "{},{},{},{},{}".format(self.title, self.author,self.pages,self.status,self.index)
 
     def search_by_title(self,title):
+        count=0
         self.search_title = title
-        for i in range(len(self.book)):
-            if(self.search_title == self.all_books[i][0]):
+        for i in range(len(self.file_list)):
+
+
+            if(self.search_title==self.file_list[i][0]):
                 #display
-                print(self.book[i])
+
+                print("found")
+                count=count+1
+                return self.book[i]
                 break
             else:
-                print("not found")
-        return self.book
+                continue
+        if count==0:
+            print("not found")
+
 
     def add_book(self,title,author,pages):
         self.title = title

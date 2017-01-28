@@ -1,42 +1,41 @@
-import csv
 
-FILENAME = "sales.csv"
-OUTFILE = "sales_output.csv"
-# file_pointer = open(FILENAME, "r")
-# data = file_pointer.readlines()
-# print(data)
-# file_pointer.close()
-
-#*************************
-class House:
-    def __init__(self, br=0, sqft=0, price=0.0):
-        self.br = br
-        self.sqft = sqft
-        self.price = price
+class Hero:
+    def __init__(self, name, health=100):
+        self.name = name # the property that the class have.
+        self.health = health
 
     def __str__(self):
-        return "{} bedroom, {} sqft, ${}".format(self.br, self.sqft, self.price)
+        return "Hero {}, health at {}.".format(self.name, self.health)
 
-out_pointer = open(OUTFILE, "w")
-with open(FILENAME, "r") as my_file:
-    csv_pointer = csv.reader(my_file)
-    header = ""
-    count = 0
-    three_br_total_price = 0.0
-    three_br_total_area = 0
-    #for row in my_file:
-    for row in csv_pointer:
-        if count != 0:
-            #print(row)
-            house = House(int(row[4]), int(row[6]), float(row[9]))
-            if house.br == 3:
-                three_br_total_area += house.sqft
-                three_br_total_price += house.price
-            print(house)
-        if count == 0:
-            header = row
-        count += 1
-    print("3 bedder psf = ${:.2f}".format(float(three_br_total_price/three_br_total_area)))
-    print("Total record = {}".format(count-1), file=out_pointer)
-    print(header)
-out_pointer.close()
+    def eat(self, food):
+        if food == 'apple':
+            self.health += 20
+        elif food == "fried chicken":
+            self.health -= 50
+
+    def __add__(self, other):
+        return self.health + other.health
+
+class Fruit:
+    def __init__(self):
+        pass
+
+superman = Hero("Superman")
+print(superman)
+superman.eat("apple")
+print(superman)
+
+batman = Hero("Batman")
+batman.eat("fried chicken")
+print(batman)
+
+print("abc" + "def")
+print(superman + batman)
+print(type(batman))
+
+heros = [superman, batman] #creating a list of Hero objects
+print(heros)
+
+for hero in heros:
+    hero.eat("apple")
+    print(hero)
