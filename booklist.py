@@ -3,7 +3,7 @@
 
 
 from operator import itemgetter
-
+from book import Book
 
 class BookList():
 
@@ -40,8 +40,8 @@ class BookList():
 
             if self.book[i][3] == "c":
                 self.completed_books.append(self.book[i])
-        print("required{}".format(self.required_books))
-        print("completed{}".format(self.completed_books))
+        #print("required{}".format(self.required_books))
+        #print("completed{}".format(self.completed_books))
 
 
     def __str__(self):
@@ -77,7 +77,7 @@ class BookList():
         self.data.append("r")
         self.index_value=int(self.index_value)+1
         self.data.append(self.index_value)
-
+        self.book.append(self.data)
 
 
         self.required_books.append(self.data)
@@ -109,11 +109,11 @@ class BookList():
             self.list_books.append(self.required_books[i])
         for i in range(len(self.completed_books)):
             self.list_books.append(self.completed_books[i])
-
+        self.list_books.sort(key=itemgetter(1, 2))
         # opens the file to rewrite
         outFile = open("books.csv", "w")
 
-        for i in range(len(self.list_books)-1):
+        for i in range(len(self.list_books)):
             # slicing the data to remove the index number
             data = self.list_books[i][:4]
             # writing in the file
@@ -127,10 +127,17 @@ class BookList():
         outFile.close()
         print("{} books saved to {} \nHave a nice day :)".format(len(self.list_books) - 1, "books.csv"))
 
+
     def sort_books(self):
         self.book.sort(key=itemgetter(1, 2))
         print(self.book)
 
+    def display(self):
+        h=Book(self.book[1])
+        q=h.mark_completed(self.required_books[1])
+        self.required_books[1]=q
+        print(self.required_books)
+        h.book_length(self.book[1])
 
 
 
