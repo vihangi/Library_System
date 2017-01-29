@@ -85,13 +85,13 @@ class BookList():
 
         return self.file_list
 
-    def pages_required_books_(self):
+    def pages_required_books(self):
 
         self.total_pages=0
         for i in range(len(self.required_books)):
             self.total_pages=int(self.required_books[i][2])+self.total_pages
 
-        print(self.total_pages)
+        return self.total_pages
 
 
     def total_completed_books(self):
@@ -99,7 +99,7 @@ class BookList():
         for i in range(len(self.completed_books)):
             self.total_pages = int(self.completed_books[i][2]) + self.total_pages
 
-        print(self.total_pages)
+        return self.total_pages
 
     def save_Books(self):
         self.list_books = []
@@ -128,16 +128,37 @@ class BookList():
         print("{} books saved to {} \nHave a nice day :)".format(len(self.list_books) - 1, "books.csv"))
 
 
-    def sort_books(self):
-        self.book.sort(key=itemgetter(1, 2))
-        print(self.book)
+    def sort_books_required(self):
+        self.required_books.sort(key=itemgetter(1, 2))
 
-    def display(self):
-        h=Book(self.book[1])
+    def sort_books_completed(self):
+        self.completed_books.sort(key=itemgetter(1, 2))
+
+
+    def display(self,name):
+        self.name=name
+        for i in range(len(self.book)):
+            if self.name== self.book[i][0]:
+                h=Book(self.book[i])
+                print("found")
+                return h
+    def mark_completed(self,name):
+        self.name=name
+
+        for i in range(len(self.book)):
+            if self.name== self.book[i][0]:
+                Book.mark_completed(self.book[i])
+                self.completed_books.append(self.book[i])
+                self.required_books.pop(self.book[i])
+                print("marked")
+                return h
+
+
+        """
         q=h.mark_completed(self.required_books[1])
         self.required_books[1]=q
         print(self.required_books)
         h.book_length(self.book[1])
-
+        """
 
 

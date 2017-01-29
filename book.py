@@ -15,6 +15,7 @@ class Book:
 
     def mark_completed(self,name):
         self.completed_book=name
+
         self.completed_book[3]="c"
 
         return self.completed_book

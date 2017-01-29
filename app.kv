@@ -43,20 +43,22 @@ BoxLayout:
                 on_press: app.handle_add_new_book()
 
             Button:
-                text: 'reset'
-                on_press: app.handle_reset()
+                text: 'Clear'
+                on_press: app.clear_all()
 
         BoxLayout:
             orientation:'vertical'
             Label:
                 text: 'Total pages to read'
                 color: (1, 1, 0, 1)
-                id: output_label
+                id: pages
+                size_hint_y: 0.3
             GridLayout:
                 id:entries
                 cols: 1
                 orientation: 'vertical'
             Label:
-                text: 'click books to mark them as completed'
+                text:"Click Books to mark them as completed"
                 color: (1, 1, 0, 1)
-                id: output_label
+                id:status_text
+                size_hint_y: 0.3
