@@ -41,12 +41,11 @@ class ReadingListApp(App):
         self.root.ids.status_text.text = "Click Books to mark them as completed"
         self.pages = self.book.pages_required_books()
         self.root.ids.pages.text = "Total pages to read: {} ".format(str(self.pages))
-        print(self.books_required)
         self.root.ids.entries.clear_widgets()
         for i in range(len(self.books_required)):
 
             temp_button = Button(text=self.books_required[i][0])
-            #temp_button.bind(on_release=self.press_entry)
+            #temp_button.bind(on_release=self.mark(self.books_required[i][0]))
 
             #temp_button.bind(on_release=self.mark(temp_button.text))
             self.root.ids.entries.add_widget(temp_button)
@@ -75,25 +74,36 @@ class ReadingListApp(App):
         self.book=self.book.display(self.name_book)
         self.root.ids.status_text.text = str(self.book)
 
-    def mark(self,name):
+    def mark(self,name=""):
 
         print(name)
-
-        self.book=self.book.mark_completed(name)
-        self.root.ids.status_text.text = str(self.book)
+        self.b=self.book.search_by_title(name)
+        self.h=self.book.mark_complete(self.b)
+        self.root.ids.status_text.text = str(self.h)
 
     def book_to_be_added(self,title,author,pages):
-        self.title = str(title.text)
-        self.author =str(author.text)
-        self.pages =str(pages.text)
-        self.list=self.book.add_book(self.title,self.author,self.pages)
+        self.title = title.text
+        print("title={}".format(self.title))
+        self.author = author.text
+        self.pages = pages.text
 
-        self.save=self.book.save_Books()
-        #temp_button = Button(text=self.title)
-        #temp_button.bind(on_release=self.press_entry)
-        #self.root.ids.entries.add_widget(temp_button)
-        self.handle_required()
-        self.clear_all()
+        if self.title == "" :
+            self.root.ids.status_text.text = "All fields must be completed"
+            print("blank")
+
+        elif self.author == "":
+            self.root.ids.status_text.text = "All fields must be completed"
+
+        elif self.pages.isdigit()== False:
+            print("wrong")
+            self.root.ids.status_text.text = "Please enter a valid number"
+
+        else:
+            self.page =str(pages.text)
+            self.list=self.book.add_book(self.title,self.author,self.page)
+            self.save=self.book.save_Books()
+            self.handle_required()
+            self.clear_all()
 
 
     def clear_all(self):

@@ -87,11 +87,13 @@ class BookList():
 
     def pages_required_books(self):
 
-        self.total_pages=0
+        self.total= 0
         for i in range(len(self.required_books)):
-            self.total_pages=int(self.required_books[i][2])+ self.total_pages
+            self.total_pages=int(self.required_books[i][2])
+            self.total = self.total_pages + self.total
             print(self.total_pages)
-        return self.total_pages
+        self.t = str(self.total)
+        return self.t
 
 
     def total_completed_books(self):
@@ -139,22 +141,30 @@ class BookList():
         self.name=name
         for i in range(len(self.book)):
             if self.name== self.book[i][0]:
-                h=Book(self.book[i])
+                self.h=Book(self.book[i])
                 print("found")
-                return h
+                return self.h
+
     def mark_completed(self,name):
-        self.name=name
+        self.n=name
+        self.h = Book(self.book)
+        self.b = self.h.mark_complete(self.n)
+"""
+        for i in range(len(self.required_books)):
+            if self.n == self.required_books[i][0]:
+                print(self.required_books[i])
+                self.h = Book(self.book[i])
+                self.b=self.h.mark_complete(self.required_books[i])
+                #self.h=self.m.mark_complete(self.required_books[i])
 
-        for i in range(len(self.book)):
-            if self.name== self.book[i][0]:
-                Book.mark_completed(self.book[i])
-                self.completed_books.append(self.book[i])
-                self.required_books.pop(self.book[i])
+                self.completed_books.append(self.b)
+                self.required_books.pop(i)
                 print("marked")
-                return h
+            else:
+                print("not found")
 
 
-        """
+
         q=h.mark_completed(self.required_books[1])
         self.required_books[1]=q
         print(self.required_books)

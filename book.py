@@ -13,12 +13,16 @@ class Book:
     def __str__(self):
         return "{} by {}, {} pages".format(self.title,self.author,self.pages)
 
-    def mark_completed(self,name):
+    def mark_complete(self,name):
         self.completed_book=name
+        self.new_book = []
+        self.new_book.append(self.completed_book[0])
+        self.new_book.append(self.completed_book[1])
+        self.new_book.append(self.completed_book[2])
+        self.new_book.append("c")
+        self.new_book.append(self.completed_book[4])
 
-        self.completed_book[3]="c"
-
-        return self.completed_book
+        return self.new_book
 
     def book_length(self,pages):
         self.book_long=pages
