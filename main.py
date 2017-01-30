@@ -17,6 +17,7 @@ from kivy.lang import Builder
 from kivy.uix.button import Button
 from kivy.properties import StringProperty
 from booklist import BookList
+from book import Book
 # Create your main program in this file, using the ReadingListApp class
 
 
@@ -42,10 +43,22 @@ class ReadingListApp(App):
         self.pages = self.book.pages_required_books()
         self.root.ids.pages.text = "Total pages to read: {} ".format(str(self.pages))
         self.root.ids.entries.clear_widgets()
+
+
         for i in range(len(self.books_required)):
 
             temp_button = Button(text=self.books_required[i][0])
             #temp_button.bind(on_release=self.mark(self.books_required[i][0]))
+            self.total=Book(self.books_required[i])
+            self.total_pages = self.total.book_length(self.books_required[i])
+
+
+            if self.total_pages == True:
+                temp_button.background_color =(0.4,0.1,0.7,0.9)
+
+            else:
+
+                temp_button.background_color =(0.6,0.9,0.7,0.9)
 
             #temp_button.bind(on_release=self.mark(temp_button.text))
             self.root.ids.entries.add_widget(temp_button)
@@ -60,7 +73,7 @@ class ReadingListApp(App):
         self.root.ids.entries.clear_widgets()
         for i in range(len(self.books_completed)):
             temp_button = Button(text=self.books_completed[i][0])
-
+            temp_button.background_color = (0.4, 0.1, 0.7, 0.6)
             temp_button.bind(on_release=self.press_entry)
             self.root.ids.entries.add_widget(temp_button)
 
@@ -114,6 +127,10 @@ class ReadingListApp(App):
         self.root.ids.input_title.text = ""
         self.root.ids.input_author.text = ""
         self.root.ids.input_pages.text = ""
+
+    def book_length(self):
+        print("hello")
+
 
 ReadingListApp().run()
 

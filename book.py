@@ -29,6 +29,8 @@ class Book:
         self.pages=int(self.book_long[2])
         if(self.pages>500):
             print("pages is more than 500")
+            return True
         else:
             print("pages is les than 500")
+            return False
 

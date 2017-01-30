@@ -1,68 +1,36 @@
-"""
-Kivy example for CP1404/CP5632, IT@JCU
-Dynamically create buttons based on content of dictionary
-Lindsay Ward
-Modified from popup_demo, 11/07/2016
-"""
-
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.uix.button import Button
+from kivy.clock import Clock
 from kivy.properties import StringProperty
+from kivy.core.window import Window
 
-__author__ = 'Lindsay Ward'
 
-
-class DynamicWidgetsApp(App):
-    """ Main program - Kivy app to demo dynamic widget creation """
-    status_text = StringProperty()
+class ClockDemo(App):
+    message = StringProperty()
 
     def __init__(self, **kwargs):
-        """
-        Construct main app
-        """
-        super().__init__(**kwargs)
-        # basic data example - dictionary of names: phone numbers
-        # TODO: After running it, add another entry to the dictionary and see how the layout changes
-        self.phonebook = {"Bob Brown": "0414144411", "Cat Cyan": "0441411211", "Oren Ochre": "0432123456"}
+        super(ClockDemo, self).__init__(**kwargs)
+        self.counter = 0
+        Window.size = (500, 200)
+        self.clock = None
 
     def build(self):
-        """
-        Build the Kivy GUI
-        :return: reference to the root Kivy widget
-        """
-        self.title = "Dynamic Widgets"
-        self.root = Builder.load_file('kivy_demo2.kv')
-        self.create_widgets()
+        self.root = Builder.load_file('clock_demo2.kv')
         return self.root
 
-    def create_widgets(self):
-        """
-        Create buttons from dictionary entries and add them to the GUI
-        :return: None
-        """
-        for name in self.phonebook:
-            # create a button for each phonebook entry
-            temp_button = Button(text=name)
-            temp_button.bind(on_release=self.press_entry)
-            # add the button to the "entriesBox" using add_widget()
-            self.root.ids.entriesBox.add_widget(temp_button)
+    def update(self, dt):
+        self.message = 'counter {} dt {}'.format(self.counter, dt)
+        self.counter += 1
 
-    def press_entry(self, instance):
-        """
-        Handler for pressing entry buttons
-        :param instance: the Kivy button instance
-        :return: None
-        """
-        # update status text
-        name = instance.text
-        self.status_text = "{}'s number is {}".format(name, self.phonebook[name])
+    def start(self):
+        self.stop()
+        self.clock = Clock.schedule_interval(self.update, 0.5)
 
-    def clear_all(self):
-        """
-        Clear all of the widgets that are children of the "entriesBox" layout widget
-        :return:
-        """
-        self.root.ids.entriesBox.clear_widgets()
+    def stop(self):
+        if self.clock:
+            self.clock.cancel()
 
-DynamicWidgetsApp().run()
+
+if __name__ == '__main__':
+    app = ClockDemo()
+    app.run()

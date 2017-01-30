@@ -149,6 +149,11 @@ class BookList():
         self.n=name
         self.h = Book(self.book)
         self.b = self.h.mark_complete(self.n)
+
+    def length_book(self,pages):
+        self.b=pages
+        self.page= Book(self.required_books)
+        self.a=self.page.book_length(self.b)
 """
         for i in range(len(self.required_books)):
             if self.n == self.required_books[i][0]:
