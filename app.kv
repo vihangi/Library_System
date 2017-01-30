@@ -13,34 +13,34 @@ BoxLayout:
                 text: 'List completed'
                 on_press: app.handle_completed()
 
-            Button:
-                text: 'Add new book'
-                on_press: app.handle_add_new_book()
+            Label:
+                text: 'Add New Book...'
+
             Label:
                 text: 'Title'
                 color: (1, 1, 0, 1)
-                id: output_label
+
             TextInput:
                 id: input_title
                 text: ''
             Label:
                 text: 'Author'
                 color: (1, 1, 0, 1)
-                id: output_label
+
             TextInput:
                 id: input_author
                 text: ''
             Label:
                 text: 'Pages'
                 color: (1, 1, 0, 1)
-                id: output_label
+
             TextInput:
                 id: input_pages
                 text: ''
 
             Button:
                 text: 'Add item'
-                on_press: app.handle_add_new_book()
+                on_press: app.book_to_be_added(input_title,input_author,input_pages)
 
             Button:
                 text: 'Clear'

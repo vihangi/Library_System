@@ -83,14 +83,14 @@ class BookList():
         self.required_books.append(self.data)
 
 
-        return self.file_list
+        return self.required_books
 
     def pages_required_books(self):
 
         self.total_pages=0
         for i in range(len(self.required_books)):
-            self.total_pages=int(self.required_books[i][2])+self.total_pages
-
+            self.total_pages=int(self.required_books[i][2])+ self.total_pages
+            print(self.total_pages)
         return self.total_pages
 
 
