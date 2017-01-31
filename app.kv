@@ -16,11 +16,11 @@ BoxLayout:
 
             Label:
                 text: 'Add New Book...'
-                color:(1,1,0,1)
+                color:(0.8,0,0.3,1)
 
             Label:
                 text: 'Title'
-                color: (1, 1, 0, 1)
+                color: (0.8,0,0.3,1)
 
             TextInput:
                 id: input_title
@@ -29,16 +29,17 @@ BoxLayout:
                 text: ''
             Label:
                 text: 'Author'
-                color: (1, 1, 0, 1)
+                color: (0.8,0,0.3,1)
 
             TextInput:
                 id: input_author
+                #for using tab key between text inputs
                 multiline: False
                 write_tab: False
                 text: ''
             Label:
                 text: 'Pages'
-                color: (1, 1, 0, 1)
+                color:(0.8,0,0.3,1)
 
             TextInput:
                 id: input_pages
@@ -48,6 +49,7 @@ BoxLayout:
 
             Button:
                 text: 'Add item'
+                foreground_color:(0.8,0,0.3,1)
                 on_press: app.book_to_be_added(input_title,input_author,input_pages)
 
             Button:

@@ -7,11 +7,9 @@ be marked as completed. The completed books are displayed and details for each b
 add a new book.
 GitHub URL:
 """
-from kivy.app import App
-from kivy.lang import Builder
-from kivy.core.window import Window
 
-__author__ = 'Lindsay Ward'
+
+__author__ = 'Vihangi Vagal'
 
 
 
@@ -20,11 +18,6 @@ from kivy.lang import Builder
 from kivy.uix.button import Button
 from booklist import BookList
 from book import Book
-# Create your main program in this file, using the ReadingListApp class
-
-
-
-
 
 
 class ReadingListApp(App):
@@ -35,7 +28,7 @@ class ReadingListApp(App):
         This function is used to call the kivi file
         :return:
         """
-        self.title = "Reading List 2.0"
+        self.title = "Reading List 2.0 by Vihangi Vagal"
         #loading kivy file
         self.root = Builder.load_file('app.kv')
         self.book = BookList()
