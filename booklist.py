@@ -48,22 +48,41 @@ class BookList():
         return "{}".format(self.book)
 
     def search_by_title(self,title):
-        count=0
+
         self.search_title = title
         for i in range(len(self.file_list)):
-
-
-            if(self.search_title==self.file_list[i][0]):
+            if(self.search_title ==self.file_list[i][0]):
                 #display
 
                 print("found")
-                count=count+1
-                return self.book[i]
+
+                return self.file_list[i]
                 break
-            else:
-                continue
-        if count==0:
-            print("not found")
+
+
+
+               # self.required_books[i][3] = "c"
+                #self.completed_books.append(self.required_books[i])
+                #self.required_books.pop(i)
+                #break
+        #print("cre",self.required_books)
+
+    def mark_book(self,book):
+        self.search_title=book
+
+        for i in range(len(self.required_books)):
+            if(self.search_title[0] ==self.required_books[i][0]):
+                #display
+                self.required_books[i][3] = "c"
+                self.completed_books.append(self.required_books[i])
+                self.required_books.pop(i)
+                print(self.required_books)
+                print(self.completed_books)
+                break
+
+        print(self.required_books)
+
+
 
 
     def add_book(self,title,author,pages):
@@ -142,18 +161,18 @@ class BookList():
         for i in range(len(self.book)):
             if self.name== self.book[i][0]:
                 self.h=Book(self.book[i])
-                print("found")
+
+
                 return self.h
 
     def mark_completed(self,name):
         self.n=name
-        self.h = Book(self.book)
+        print(name)
+        self.h = Book(self.required_books)
         self.b = self.h.mark_complete(self.n)
+        self.completed_books.append(self.b)
+        return self.completed_books
 
-    def length_book(self,pages):
-        self.b=pages
-        self.page= Book(self.required_books)
-        self.a=self.page.book_length(self.b)
 """
         for i in range(len(self.required_books)):
             if self.n == self.required_books[i][0]:

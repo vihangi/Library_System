@@ -38,21 +38,24 @@ class ReadingListApp(App):
         return self.root
 
     def handle_required(self):
-
+        self.book=BookList()
+        self.books_required = self.book.required_books
+        self.books_completed = self.book.completed_books
         self.root.ids.status_text.text = "Click Books to mark them as completed"
         self.pages = self.book.pages_required_books()
         self.root.ids.pages.text = "Total pages to read: {} ".format(str(self.pages))
         self.root.ids.entries.clear_widgets()
+        self.book=BookList()
 
 
         for i in range(len(self.books_required)):
 
             temp_button = Button(text=self.books_required[i][0])
-            #temp_button.bind(on_release=self.mark(self.books_required[i][0]))
+
             self.total=Book(self.books_required[i])
             self.total_pages = self.total.book_length(self.books_required[i])
 
-
+            temp_button.bind(on_release=self.press_entry)
             if self.total_pages == True:
                 temp_button.background_color =(0.4,0.1,0.7,0.9)
 
@@ -60,12 +63,15 @@ class ReadingListApp(App):
 
                 temp_button.background_color =(0.6,0.9,0.7,0.9)
 
-            #temp_button.bind(on_release=self.mark(temp_button.text))
+
             self.root.ids.entries.add_widget(temp_button)
 
 
-    def handle_completed(self):
 
+    def handle_completed(self):
+        self.book=BookList()
+        self.books_required = self.book.required_books
+        self.books_completed = self.book.completed_books
         self.root.ids.status_text.text = "Click on a book to get information"
         self.pages = self.book.total_completed_books()
         self.root.ids.pages.text = "Total pages completed: {} ".format(str(self.pages))
@@ -73,7 +79,7 @@ class ReadingListApp(App):
         self.root.ids.entries.clear_widgets()
         for i in range(len(self.books_completed)):
             temp_button = Button(text=self.books_completed[i][0])
-            temp_button.background_color = (0.4, 0.1, 0.7, 0.6)
+            temp_button.background_color = (0.4, 0.13, 0.9, 0.8)
             temp_button.bind(on_release=self.press_entry)
             self.root.ids.entries.add_widget(temp_button)
 
@@ -82,33 +88,39 @@ class ReadingListApp(App):
         # update status text
 
         self.name_book = instance.text
-        print(self.name_book)
+        self.bo=BookList()
 
-        self.book=self.book.display(self.name_book)
-        self.root.ids.status_text.text = str(self.book)
+        self.g = self.bo.search_by_title(self.name_book)
+        print(self.g)
+        if self.g[3]=="c":
+            self.bo = self.bo.display(self.name_book)
+            self.root.ids.status_text.text = "{} (completed)".format(str(self.bo))
 
-    def mark(self,name=""):
+        if self.g[3]=="r":
+            print("hello")
+            self.h = self.bo.mark_book(self.g)
+            self.bo.save_Books()
+            self.handle_completed()
 
-        print(name)
-        self.b=self.book.search_by_title(name)
-        self.h=self.book.mark_complete(self.b)
-        self.root.ids.status_text.text = str(self.h)
+
+
+
 
     def book_to_be_added(self,title,author,pages):
         self.title = title.text
-        print("title={}".format(self.title))
+
         self.author = author.text
         self.pages = pages.text
 
         if self.title == "" :
             self.root.ids.status_text.text = "All fields must be completed"
-            print("blank")
+
 
         elif self.author == "":
             self.root.ids.status_text.text = "All fields must be completed"
 
         elif self.pages.isdigit()== False:
-            print("wrong")
+
             self.root.ids.status_text.text = "Please enter a valid number"
 
         else:
@@ -128,8 +140,6 @@ class ReadingListApp(App):
         self.root.ids.input_author.text = ""
         self.root.ids.input_pages.text = ""
 
-    def book_length(self):
-        print("hello")
 
 
 ReadingListApp().run()
