@@ -5,7 +5,7 @@ Brief Project Description: This project uses two classes which is loaded in the 
 as required and completed. The required books are displayed with color coding accroding to their length , and can
 be marked as completed. The completed books are displayed and details for each book is displayed. The user can also
 add a new book.
-GitHub URL:
+GitHub URL: https://github.com/vihangi/Assignment
 """
 
 
